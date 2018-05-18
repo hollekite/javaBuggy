@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--
+        通过
+        Reader reader = Resources.getResourceAsReader("mybatis.xml");
+                SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
+                SqlSession session = sqlSessionFactory.openSession();
+        开启mybatis连接
+    -->
+    <settings>
+        <!--如果value为true的时候，当返回内容为空时，那么返回的是一个空的对象，而不是null
+            如果这里的value为false(默认值)，mybatis在没有查询到内容的时候返回null-->
+        <setting name="returnInstanceForEmptyRow" value="true"/>
+        <!--显示sql语句，此行配置如果删除，则不在后台显示SQL语句-->
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+
+    <environments default="development">
+        <environment id="development">
+            <!--使用了 JDBC 的提交和回滚设置，它依赖于从数据源得到的连接来管理事务作用域-->
+            <transactionManager type="JDBC"/>
+            <!-- mybatis提供了3种数据源类型，分别是：POOLED,UNPOOLED,JNDI -->
+            <!-- POOLED 表示支持JDBC数据源连接池 -->
+            <!-- UNPOOLED 表示不支持数据源连接池 -->
+            <!-- JNDI 表示支持外部数据源连接池 -->
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/hiber"/>
+                <property name="username" value="root"/>
+                <property name="password" value="thinknovo"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <!-- 1.每一个依次配置-->
+        <!--<mapper resource="cn/thinknovo/pojos/UserMapper.xml"/>-->
+        <!-- 2.自动扫描包内的Mapper接口与配置文件  接口文件名要与mapper文件名相同-->
+        <package name="cn/thinknovo/pojos"/>
+    </mappers>
+</configuration>

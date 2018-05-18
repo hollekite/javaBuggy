@@ -1,0 +1,15 @@
+MyBits主要作用是方便连接和数据库
+
+主要配置：
+	Mybatis.xml  ----里面主要配置数据库连接池的、<mappers>标签中主要配置每个Mapper文件的路径如果不配置路径则配置扫描路径
+	对于每一个pojo都配置一个相应的XXXMapper接口，里面定义对该opjo操作的所有与数据库操作相关的方法，同时定义一个XXXMapper.xml
+	文件，里面是配置XXXMapper中的每一种的方法的定义及参数类型配置。
+	文件，里面是配置XXXMapper中的每一种的方法的定义及参数类型配置。
+	
+	如果是用注解形式：则不能和XXXMapper.xml共存，使用注解只需要在XXXMapper中的每一种方法上加上注解即可使用，
+	但是注解的功能有限，只能使用简单的sql语句
+		注解形式：
+			   @Update({" UPDATE user SET user_name=#{username},passwd=#{passwd} where id=#{id}"})
+				int updateUser(User user);
+
+	

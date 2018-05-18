@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace定义为 包名+文件名 -->
+<mapper namespace="cn.thinknovo.pojos.UserMapper">
+    <select id="selectUser" resultType="cn.thinknovo.pojos.User">
+        select id,username,password from user
+    </select>
+
+    <insert id="insertUser" parameterType="cn.thinknovo.pojos.User">
+        insert into user values(null,#{username},#{password});
+    </insert>
+
+    <insert id="insertUserByPassword" parameterType="java.lang.String">
+        insert into user values(null,'think4',#{password});
+    </insert>
+
+    <insert id="insertUserByUserAndPassword">
+        insert into user values(null,#{username},#{password});
+    </insert>
+
+    <update id="updateUser" parameterType="cn.thinknovo.pojos.User">
+        update user set username=#{username},password=#{password} where id=#{id};
+    </update>
+
+    <delete id="deleteUser" parameterType="java.lang.String">
+        delete from user where id=#{id};
+    </delete>
+</mapper>
