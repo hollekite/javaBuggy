@@ -1,0 +1,21 @@
+maven有两个比较重要的目录：User seting2 file 和 Local respository
+	1、User seting2 file   配置文件setings.xml
+		seting.xml中重要的有两个标签：
+									1、 <localRepository>E:\Java_WorkSpace\m_repo</localRepository> 本地中央仓库地址
+									2、<mirror>
+										  <id>nexus-aliyun</id>
+										  <mirrorOf>central</mirrorOf>
+										  <name>Nexus aliyun</name>
+										  <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+										</mirror>
+										镜像源，这里是阿里的镜像源
+									3、<profiles>   jdk等的版本信息
+	2、Local respository   本地中央仓库
+	
+	
+	这两个本地目录配置好后，在新建工程的时候将相关目录选择为设置的目录即可，使用，也可以在IDEA的seting》maven中进行设置
+	同时建好的maven工程可以在屏幕右边的maven project中更改这两个目录并重新更新即可。
+	
+	
+	
+	
