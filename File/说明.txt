@@ -1,0 +1,1 @@
+首先得调用InitFiles（File file） 然后才能进行各项操作
