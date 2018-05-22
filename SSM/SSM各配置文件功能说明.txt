@@ -1,0 +1,13 @@
+﻿web.xml---------启动加载spring容器以便自动注入对象、配置spring监听器，传入springMVC的配置文件
+	   ---------配置编码拦截器
+	 
+spring_database.xml(主要作用--实现IOC)
+			  ------------------------------配置数据库连接相关参数注入，dataSource
+			  ------------------------------配置mybatis 使用参数 sqlSessionFactory
+			  ------------------------------扫描mybatis的所有mapper并生成Mapper对应的bean 以便后期使用
+			  	 
+	   
+spring-mvc.xml（主要作用实现controller的请求分发功能）
+			  ----------------开启自动扫描注解包扫描mvc控制器（controller），并生成bean,以便后期使用
+			  ----------------开启json数据传送注解支持
+			  ----------------配置返回地址前后缀
