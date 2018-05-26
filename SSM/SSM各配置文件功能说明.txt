@@ -4,6 +4,7 @@
 spring_database.xml(主要作用--实现IOC)
 			  ------------------------------配置数据库连接相关参数注入，dataSource
 			  ------------------------------配置mybatis 使用参数 sqlSessionFactory
+			  					sqlSessionFactory配置项中包括mybatis.xml配置文件和mapper.xml文件
 			  ------------------------------扫描mybatis的所有mapper并生成Mapper对应的bean 以便后期使用
 			  	 
 	   
