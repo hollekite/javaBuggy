@@ -1,0 +1,8 @@
+放一个链接：https://www.cnblogs.com/sharpest/p/7877501.html该链接对dom4j操作xml文件写的很详细。膜拜！
+
+1、java文件为获取xml文件Doucument对象将Doucument文件写入xml文件
+2、获取Doucument后xml文件的每一个标签都对应是一个Element，可以通过遍历，逐级选择、条件选择等选择对应的标签。
+3、标签中的属性是Attribute对象，对应该对象可以获取、和修改属性名和属性值
+4、标签的值<father>"holle"</father> 为标签text，获取对应的标签的对象后便可以获取和修改对应的标签值
+5、在修改了标签或属性后，将对应的Doucument写入原xml文件即可。
+

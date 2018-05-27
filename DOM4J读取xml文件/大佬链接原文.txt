@@ -1,0 +1,381 @@
+﻿目录
+
+1、DOM4J简介
+
+2、XML文档操作1
+
+      2.1、读取XML文档：
+
+      2.2、获取根节点
+
+      2.3、. 新增一个节点以及其下的子节点与数据
+
+      2.4、 写入XML文件
+
+      2. 5、 遍历xml节点
+
+      2.6、创建xml文件
+
+      2.7、修改节点属性
+
+      2.8、删除节点
+
+2、XML文档操作2
+
+       2.1、Document对象相关
+
+          1、读取XML文件,获得document对象.
+
+          2、解析XML形式的文本,得到document对象.
+
+          3、主动创建document对象.
+
+       2.2、节点相关
+
+          1、获取文档的根节点.
+
+          2、取得某节点的单个子节点.
+
+          3.取得节点的文字
+
+          4.取得某节点下指定名称的所有节点并进行遍历.
+
+          5.对某节点下的所有子节点进行遍历.
+
+          6.在某节点下添加子节点.
+
+          7.设置节点文字.
+
+          8.删除某节点.
+
+          9.添加一个CDATA节点.
+
+       2.3、属性相关.
+
+          1.取得节点的指定的属性
+
+          2.取得属性的文字
+
+          3.遍历某节点的所有属性
+
+          4.设置某节点的属性和文字.
+
+          5.设置属性的文字
+
+          6.删除某属性
+
+      2.4、将文档写入XML文件.
+
+          1.文档中全为英文,不设置编码,直接写入.
+
+          2.文档中含有中文,设置编码格式再写入.
+
+      2.5、字符串与XML的转换
+
+         1.将字符串转化为XML
+
+         2.将文档或节点的XML转化为字符串.
+
+   3、dom4j的事件处理模型涉及的类和接口：
+
+      3.1、类：SAXReader
+
+      3.2、接口ElementHandler
+
+      3.3、Element类
+
+      3.4、类DocumentHelper
+
+4、通过xpath查找指定的节点
+
+       4.1、 xpath语法
+
+          1、选取节点
+
+          2、谓语（Predicates）
+
+          3、选取未知节点
+
+          4、选取若干路径
+
+          5、XPath 轴
+
+          6、路径
+
+          7、XPath 运算符
+
+ 
+
+1、DOM4J简介
+    DOM4J是 dom4j.org 出品的一个开源 XML 解析包。DOM4J应用于 Java 平台，采用了 Java 集合框架并完全支持 DOM，SAX 和 JAXP。
+
+    DOM4J 使用起来非常简单。只要你了解基本的 XML-DOM 模型，就能使用。
+
+    Dom：把整个文档作为一个对象。
+
+  DOM4J 最大的特色是使用大量的接口。它的主要接口都在org.dom4j里面定义：
+
+Attribute
+
+定义了 XML 的属性。
+
+Branch
+
+指能够包含子节点的节点。如XML元素(Element)和文档(Docuemnts)定义了一个公共的行为
+
+CDATA
+
+定义了 XML CDATA 区域
+
+CharacterData
+
+是一个标识接口，标识基于字符的节点。如CDATA，Comment, Text.
+
+Comment
+
+定义了 XML 注释的行为
+
+Document
+
+定义了XML 文档
+
+DocumentType
+
+定义 XML DOCTYPE 声明
+
+Element
+
+定义XML 元素
+
+ElementHandler
+
+定义了Element 对象的处理器
+
+ElementPath
+
+被 ElementHandler 使用，用于取得当前正在处理的路径层次信息
+
+Entity
+
+定义 XML entity
+
+Node
+
+为dom4j中所有的XML节点定义了多态行为
+
+NodeFilter
+
+定义了在dom4j 节点中产生的一个滤镜或谓词的行为（predicate）
+
+ProcessingInstruction
+
+定义 XML 处理指令
+
+Text
+
+定义 XML 文本节点
+
+Visitor
+
+用于实现 Visitor模式
+
+XPath
+
+在分析一个字符串后会提供一个 XPath 表达式
+
+接口之间的继承关系如下：
+
+interface java.lang.Cloneable
+
+    interface org.dom4j.Node
+
+           interface org.dom4j.Attribute
+
+           interface org.dom4j.Branch
+
+                  interface org.dom4j.Document
+
+                  interface org.dom4j.Element
+
+           interface org.dom4j.CharacterData
+
+                  interface org.dom4j.CDATA
+
+                  interface org.dom4j.Comment
+
+                  interface org.dom4j.Text
+
+           interface org.dom4j.DocumentType
+
+           interface org.dom4j.Entity
+
+           interface org.dom4j.ProcessingInstruction
+
+2、XML文档操作1
+2.1、读取XML文档：
+     读写XML文档主要依赖于org.dom4j.io包，有DOMReader和SAXReader两种方式。因为利用了相同的接口，它们的调用方式是一样的。
+
+ 
+
+ 
+
+[java] view plain copy
+ 
+public static Document load(String filename) {  
+    Document document = null;  
+    try {  
+        SAXReader saxReader = new SAXReader();  
+        document = saxReader.read(new File(filename)); // 读取XML文件,获得document对象  
+    } catch (Exception ex) {  
+        ex.printStackTrace();  
+    }  
+    return document;  
+}  
+  
+public static Document load(URL url) {  
+    Document document = null;  
+    try {  
+        SAXReader saxReader = new SAXReader();  
+        document = saxReader.read(url); // 读取XML文件,获得document对象  
+    } catch (Exception ex) {  
+        ex.printStackTrace();  
+    }  
+    return document;  
+}  
+ 
+
+ 
+
+//读取指定的xml文件之后返回一个Document对象，这个对象代表了整个XML文档，用于各种Dom运算。执照XML文件头所定义的编码来转换。
+
+2.2、获取根节点
+根节点是xml分析的开始，任何xml分析工作都需要从根开始
+
+ 
+
+[java] view plain copy
+ 
+Xml xml = new Xml();  
+  
+Document dom = xml.load(path + "/" + file);  
+  
+Element root = dom.getRootElement();  
+ 
+
+ 
+
+2.3、. 新增一个节点以及其下的子节点与数据
+ 
+
+[java] view plain copy
+ 
+Element menuElement = root.addElement("menu");  
+  
+Element engNameElement = menuElement.addElement("engName");  
+  
+engNameElement.setText(catNameEn);  
+  
+Element chiNameElement = menuElement.addElement("chiName");  
+  
+chiNameElement.setText(catName);  
+ 
+
+ 
+
+2.4、 写入XML文件
+注意文件操作的包装类是乱码的根源
+
+[java] view plain copy
+ 
+public static boolean doc2XmlFile(Document document, String filename) {  
+    boolean flag = true;  
+    try {  
+        XMLWriter writer = new XMLWriter(new OutputStreamWriter(  
+                new FileOutputStream(filename), "UTF-8"));  
+        writer.write(document);  
+        writer.close();  
+    } catch (Exception ex) {  
+        flag = false;  
+        ex.printStackTrace();  
+    }  
+    System.out.println(flag);  
+    return flag;  
+}  
+ 
+    Dom4j通过XMLWriter将Document对象表示的XML树写入指定的文件，并使用OutputFormat格式对象指定写入的风格和编码方法。调用OutputFormat.createPrettyPrint()方法可以获得一个默认的pretty print风格的格式对象。对OutputFormat对象调用setEncoding()方法可以指定XML文件的编码方法。
+ 
+[java] view plain copy
+ 
+public void writeTo(OutputStream out, String encoding)  
+        throws UnsupportedEncodingException, IOException {  
+    OutputFormat format = OutputFormat.createPrettyPrint();  
+  
+    format.setEncoding("gb2312");  
+  
+    XMLWriter writer = new XMLWriter(System.out, format);  
+  
+    writer.write(doc);  
+  
+    writer.flush();  
+  
+    return;  
+  
+}  
+2. 5、 遍历xml节点
+       对Document对象调用getRootElement()方法可以返回代表根节点的Element对象。拥有了一个Element对象后，可以对该对象调用elementIterator()方法获得它的子节点的Element对象们的一个迭代器。使用(Element)iterator.next()方法遍历一个iterator并把每个取出的元素转化为Element类型。
+
+ 
+
+[java] view plain copy
+ 
+public boolean isOnly(String catNameEn, HttpServletRequest request,  
+        String xml) {  
+    boolean flag = true;  
+    String path = request.getRealPath("");  
+    Document doc = load(path + "/" + xml);  
+    Element root = doc.getRootElement();  
+    for (Iterator i = root.elementIterator(); i.hasNext();) {  
+        Element el = (Element) i.next();  
+        if (catNameEn.equals(el.elementTextTrim("engName"))) {  
+            flag = false;  
+            break;  
+        }  
+    }  
+    return flag;  
+}  
+2.6、创建xml文件
+ 
+
+[java] view plain copy
+ 
+public static void main(String args[]) {  
+  
+    String fileName = "c:/text.xml";  
+  
+    Document document = DocumentHelper.createDocument();// 建立document对象，用来操作xml文件  
+  
+    Element booksElement = document.addElement("books");// 建立根节点  
+  
+    booksElement.addComment("This is a test for dom4j ");// 加入一行注释  
+  
+    Element bookElement = booksElement.addElement("book");// 添加一个book节点  
+  
+    bookElement.addAttribute("show", "yes");// 添加属性内容  
+  
+    Element titleElement = bookElement.addElement("title");// 添加文本节点  
+  
+    titleElement.setText("ajax in action");// 添加文本内容  
+  
+    try {  
+  
+        XMLWriter writer = new XMLWriter(new FileWriter(new File(fileName)));  
+  
+        writer.close();  
+  
+    } catch (Exception e) {  
+  
+        e.printStackTrace();  
+  
+    }  
+  
+}  
