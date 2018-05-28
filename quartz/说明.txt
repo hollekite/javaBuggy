@@ -1,0 +1,10 @@
+quartz是一个任务管理框架，通过这个框架，用户可以自定义任务的执行机制。
+quartz通过将用户定义的job和trigger相关联，实现任务调度
+	其中job必须要实现import org.quartz.Job 的Job接口，同时在execute()方法中定义任务的执行流程
+	trigger是触发器：其中最常用的是SimpleTrigger和CronTriggerImpl
+				SimpleTrigger可以简单的设置任务执行的一些条件：包括任务开始、结束时间、执行次数、执行时间间隔。
+				CronTriggerImpl可以通过corn表达式更加强大的设置任务的执行条件
+					corn表达式参考：http://lishijia188.blog.163.com/blog/static/121782812201092122351961/
+Scheduler通过scheduler.scheduleJob(job,cronTrigger);将任务和触发器关联，同时任务和触发器是分别定义的，多一可以复用。
+
+参考文章：https://www.ibm.com/developerworks/cn/java/j-quartz/index.html#artrelatedtopics
