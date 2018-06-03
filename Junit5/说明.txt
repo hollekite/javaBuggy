@@ -1,2 +1,9 @@
-�տ�ʼѧϰJunit5 �˽���һЩ�򵥵Ĺ��ܡ�
-Junit5��֮ǰ��Junit�汾��ע���Ӧ����������Щע�������Ѿ��ı䣬��ʹ�õ�ʱ����ע��
+刚开始学习Junit5 了解了一些简单的功能。
+Junit5和之前的Junit版本在注解的应用有区别，有些注解名称已经改变，在使用的时候需注意
+关于@Test方法前后方法的执行顺序问题
+  在测试的时候发现  @BeforeAll   @AfterAll 在执行的时候顺序不是按照正常忧伤到下执行的，而是经过方法名的字符串排序的顺序有小到大执行的如：
+     @BeforeAll
+    public void BeforeMethodb()       //该方法会在BeforeMethoda()执行之后再执行
+    @BeforeAll
+    public void BeforeMethoda()
+这里放一个介绍比较好的网站地址：http://junit5.doczh.cn/guide/writing-tests/assertions.html
