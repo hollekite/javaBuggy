@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <!-- 配置全局属性 -->
+    <settings>
+        <!-- 使用jdbc的getGeneratedKeys获取数据库自增主键值 -->
+        <setting name="useGeneratedKeys" value="true" />
+
+        <!-- 使用列别名替换列名 默认:true -->
+        <setting name="useColumnLabel" value="true" />
+
+        <!-- 开启驼峰命名转换:Table{create_time} -> Entity{createTime} -->
+        <setting name="mapUnderscoreToCamelCase" value="true" />
+        <!--如果value为true的时候，当返回内容为空时，那么返回的是一个空的对象，而不是null
+          如果这里的value为false(默认值)，mybatis在没有查询到内容的时候返回null-->
+        <setting name="returnInstanceForEmptyRow" value="true"/>
+        <!--显示sql语句，此行配置如果删除，则不在后台显示SQL语句-->
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+    <mappers>
+        <!-- 自动扫描包内的Mapper接口与配置文件
+             接口文件名要与mapper文件名相同
+             纳入spring管理之后，不再需要扫描-->
+
+    </mappers>
+</configuration>
